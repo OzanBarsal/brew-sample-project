@@ -5,7 +5,9 @@ import Cell from './Cell';
 const Column = ({ columnData }) => {
   console.log('Column data : ', columnData);
   const getRandomColor = () => {
-    return '#' + Math.floor(Math.random() * 16777215).toString(16);
+    return (
+      '#' + Math.floor((0.2 + Math.random() * 0.6) * 16777215).toString(16)
+    );
   };
   columnData.sort((a, b) => a.first_publish_year - b.first_publish_year);
   return (
