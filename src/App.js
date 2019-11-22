@@ -109,9 +109,7 @@ const App = () => {
   if (dataShrunk) {
     return (
       <div className="App">
-        <header className="App-header">
-          <KanbanBoard data={necessaryData} />
-        </header>
+        <KanbanBoard data={necessaryData} />
       </div>
     );
   }
