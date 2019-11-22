@@ -27,8 +27,7 @@ const App = () => {
   }
 
   const shrinkData = () => {
-    // Here we'll narrow down our data to what we need, in order to achieve easier development process via easier readability.
-    console.log("Shrinking this data => ", data);
+    // Here we'll narrow down our data to what we need.
     for (let i=0; i < data.length; i++) {
       // Here we check if the book was published in English and if it is, we'll put it in our necessaryData array.
       if (data[i].language && data[i].language.includes("eng")) {
@@ -45,25 +44,26 @@ const App = () => {
         }
 
         // We use our authors_str in our necessaryData array's author_name field.
-
         validEntry["author_name"] = authors_str;
         validEntry["title"] = data[i].title;
         validEntry["first_publish_year"] = data[i].first_publish_year;
         validEntry["edition_count"] = data[i].edition_count;
 
-        //The API returns two fields as publish_year which is an array consisting of integer values for years
-        //and publish_date which is an array that returns strings with unstable date formatting.
-        //Here we'll check the latest publish year by checking for both arrays and keeping the highest year we found.
-        //WARNING THIS WILL CHANGE - For now I'll just be using the integer array and will return to change this.
-
+        // The API returns two fields for publish information, as publish_year which is an array consisting of integer values for years
+        // and as publish_date which is an array that returns strings with unstable date formatting.
+        // Here we'll check the latest publish year by checking for both arrays and keeping the highest year we found.
         let all_publish_years = [];
+        // Here we look for 4 repeating digits in each element in the publish_date array provided from our API and parse our results to int.
+        // With this we create and array that takes every publish year as int from the publish_date array which stores it's elements as strings.
         all_publish_years = data[i].publish_date.map(element => parseInt(element.match(/\d{4}/)[0]));
+        // Here we combine the publish years we get from the publish_date array with publish_year array from the API that has integer elements already.
         all_publish_years = all_publish_years.concat(data[i].publish_year);
+        // After combining every publish year we got, we find the highest one in our combined array and set it as last_publish_year.
         validEntry["last_publish_year"] = Math.max(...all_publish_years);
+        // Once we assign every value we need for this project, we push the entry into our necessaryData array.
         necessaryData.push(validEntry);
       }
     }
-    console.log("To This Data => ", necessaryData);
     setDataShrunk(true);
     setIsLoading(false);
   }
