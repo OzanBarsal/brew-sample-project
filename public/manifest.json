@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Brew Sample App",
+  "name": "Brew Interactive Sample App",
   "icons": [
     {
       "src": "favicon.ico",
