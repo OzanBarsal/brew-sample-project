@@ -2,17 +2,18 @@
   background-color: #fcfcfc;
   display: flex;
   flex-direction: column;
-  margin: 10px;
   .title {
     font-size: 28px;
     color: #707090;
     margin: 10px;
     margin-left: 20px;
+    margin-bottom: 0;
   }
   .columns-container {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 100vw;
     overflow: scroll;
+    padding-bottom: 10px;
   }
 }

@@ -14,9 +14,11 @@ const Column = ({ columnData }) => {
     <div className="column-container">
       <div className="top-bar" style={{ backgroundColor: getRandomColor() }} />
       <div className="title">{columnData[0].last_publish_year}</div>
-      {columnData.map(value => {
-        return <Cell key={value.title} cellData={value} />;
-      })}
+      <div className="cells-container">
+        {columnData.map(value => {
+          return <Cell key={value.title} cellData={value} />;
+        })}
+      </div>
     </div>
   );
 };
