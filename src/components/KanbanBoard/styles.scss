@@ -1,0 +1,17 @@
+.board-container {
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  .title {
+    font-size: 28px;
+    color: #707090;
+    margin: 10px;
+  }
+  .columns-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow: scroll;
+  }
+}

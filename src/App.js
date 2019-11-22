@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
 import KanbanBoard from './components/KanbanBoard';
-import './App.css';
+import './App.scss';
 
 const App = () => {
   const [hasError, setErrors] = useState(false);
@@ -83,8 +83,8 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className="App-loading">
+        <header className="Loading-header">
           <Loader
             type="BallTriangle"
             color={LOADER_COLOR}
@@ -97,7 +97,7 @@ const App = () => {
   }
   if (hasError) {
     return (
-      <div className="App">
+      <div className="App-error">
         <header className="App-header">
           <p>Something went wrong and I swear it's not my fault!</p>
           <p>Here's all I know:</p>
