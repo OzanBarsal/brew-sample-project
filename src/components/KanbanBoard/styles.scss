@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   overflow: auto;
+  margin: 10px;
   .title {
     font-size: 28px;
     color: #707090;
     margin: 10px;
+    margin-left: 20px;
   }
   .columns-container {
     display: flex;
