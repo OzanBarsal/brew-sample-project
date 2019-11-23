@@ -14,8 +14,10 @@ const App = () => {
   const [necessaryData, setNecessaryData] = useState();
 
   async function fetchData() {
-    console.log('Fetching data from : ' + API_URL + AUTHOR_ID);
-    const res = await fetch(API_URL + AUTHOR_ID);
+    console.log(
+      'Fetching data from : ' + API_URL + AUTHOR_ID + 'lang=eng&limit=1000'
+    );
+    const res = await fetch(API_URL + AUTHOR_ID + 'lang=eng&limit=1000');
     res
       .json()
       .then(res => handleData(res))
@@ -50,6 +52,7 @@ const App = () => {
         validEntry['title'] = apiData[i].title;
         validEntry['first_publish_year'] = apiData[i].first_publish_year;
         validEntry['edition_count'] = apiData[i].edition_count;
+        validEntry['key'] = i;
 
         // The API returns two fields for publish information, as publish_year which is an array consisting of integer values for years
         // and as publish_date which is an array that returns strings with unstable date formatting.
@@ -57,18 +60,23 @@ const App = () => {
         let all_publish_years = [];
         // Here we look for 4 repeating digits in each element in the publish_date array provided from our API and parse our results to int.
         // With this we create and array that takes every publish year as int from the publish_date array which stores it's elements as strings.
-        all_publish_years = apiData[i].publish_date.map(element =>
-          parseInt(element.match(/\d{4}/)[0])
-        );
+        if (apiData[i].publish_date) {
+          all_publish_years = apiData[i].publish_date.map(element =>
+            parseInt(element.match(/\d{4}/)[0])
+          );
+        }
         // Here we combine the publish years we get from the publish_date array with publish_year array from the API that has integer elements already.
         all_publish_years = all_publish_years.concat(apiData[i].publish_year);
         // After combining every publish year we got, we find the highest one in our combined array and set it as last_publish_year.
-        validEntry['last_publish_year'] = Math.max(...all_publish_years);
-        // Once we assign every value we need for this project, we push the entry into our necessaryData array.
-        shrunkData.push(validEntry);
+        if (Math.max(...all_publish_years)) {
+          validEntry['last_publish_year'] = Math.max(...all_publish_years);
+          // Once we assign every value we need for this project, we push the entry into our necessaryData array.
+          shrunkData.push(validEntry);
+        }
       }
     }
     setNecessaryData(shrunkData);
+    console.log('Valid Entry Count : ', shrunkData.length);
     setDataShrunk(true);
     setIsLoading(false);
   };
